@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: monospace;
+}
+
+body {
+  overflow-x: hidden;
+  margin-bottom: 30px;
+}
+
+input {
+  outline: none;
+  border: 0;
+}
+
+button {
+  outline: none;
+  border:none;
+  cursor: pointer;
+}
