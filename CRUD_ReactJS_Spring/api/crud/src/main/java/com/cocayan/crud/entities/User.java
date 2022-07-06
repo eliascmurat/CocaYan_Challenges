@@ -10,16 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Length;
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
 @Table(name = "users")
 @Entity
@@ -30,16 +26,37 @@ public class User {
     @Column(name = "userid")
     private Long userId;
 
-    @NotNull
-    @Length(max = 100, min = 2)
     @Column(name = "username")
     private String userName;
 
-    @NotNull
     @Column(name = "userage")
     private Integer userAge;
 
     @OneToMany(mappedBy = "user")
     private List<Contact> contactList = new ArrayList<>();
-    
+ 
+    public User(String userName, Integer userAge) {
+        this.userName = userName;
+        this.userAge = userAge;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setUserAge(Integer userAge) {
+        this.userAge = userAge;
+    }
+
+    public void setContactList(List<Contact> contactList) {
+        this.contactList = contactList;
+    }
+
+    public void setContactList(Contact contact) {
+        this.contactList.add(contact);
+    }
 }

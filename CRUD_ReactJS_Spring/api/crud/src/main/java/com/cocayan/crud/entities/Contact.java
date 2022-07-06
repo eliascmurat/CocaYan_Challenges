@@ -8,16 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
+@Data 
 @NoArgsConstructor
 @Table(name = "contacts")
 @Entity
@@ -28,7 +25,6 @@ public class Contact {
     @Column(name = "contactid")
     private Long contactId;
 
-    @NotNull
     @Column(name = "phonenumber")
     private String phoneNumber;
 
@@ -36,5 +32,9 @@ public class Contact {
     @JoinColumn(name = "userid")
     @JsonBackReference
     private User user;
+
+    public Contact(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
         
 }

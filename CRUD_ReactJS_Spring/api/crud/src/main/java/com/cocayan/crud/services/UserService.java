@@ -1,11 +1,13 @@
 package com.cocayan.crud.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.cocayan.crud.entities.Contact;
 import com.cocayan.crud.entities.User;
 import com.cocayan.crud.repositories.UserRepository;
 
@@ -15,12 +17,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public Page<User> getAllUsers(Pageable paginacao) {
+        return userRepository.findAll(paginacao);
     }
 
-    public Optional<User> getUserById(Long idUser) {
-        return userRepository.findById(idUser);
+    public Optional<User> getUserById(Long userId) {
+        return userRepository.findById(userId);
     }
 
     public User createUser(User user) {
@@ -44,6 +46,7 @@ public class UserService {
         Optional<User> optional = getUserById(userId);
         if (optional.isPresent()) {
             userRepository.deleteById(userId);
+            
             return true;
         }
 
