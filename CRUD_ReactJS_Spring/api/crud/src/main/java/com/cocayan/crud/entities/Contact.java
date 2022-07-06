@@ -1,18 +1,16 @@
 package com.cocayan.crud.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Length;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,25 +19,22 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "users")
+@Table(name = "contacts")
 @Entity
-public class User {
-
+public class Contact {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userid")
-    private Long userId;
+    @Column(name = "contactid")
+    private Long contactId;
 
     @NotNull
-    @Length(max = 100, min = 2)
-    @Column(name = "username")
-    private String userName;
+    @Column(name = "phonenumber")
+    private String phoneNumber;
 
-    @NotNull
-    @Column(name = "userage")
-    private Integer userAge;
-
-    @OneToMany(mappedBy = "user")
-    private List<Contact> contactList = new ArrayList<>();
-    
+    @ManyToOne
+    @JoinColumn(name = "userid")
+    @JsonBackReference
+    private User user;
+        
 }

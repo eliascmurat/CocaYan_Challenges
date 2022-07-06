@@ -31,8 +31,8 @@ public class UserService {
         Optional<User> optional = getUserById(userId);
         if (optional.isPresent()) {
             User updatedUser = optional.get();
-            updatedUser.setName(user.getName());
-            updatedUser.setAge(user.getAge());
+            updatedUser.setUserName(user.getUserName());
+            updatedUser.setUserAge(user.getUserAge());
             
             return userRepository.save(updatedUser);
         }

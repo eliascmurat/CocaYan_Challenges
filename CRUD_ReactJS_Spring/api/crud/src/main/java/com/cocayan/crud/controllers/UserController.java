@@ -54,7 +54,7 @@ public class UserController {
     public ResponseEntity<User> create(@RequestBody @Valid User user, UriComponentsBuilder uriBuilder) {
         User newUser = userService.createUser(user);
         
-        URI uri = uriBuilder.path("/users/{id}").buildAndExpand(newUser.getId()).toUri();
+        URI uri = uriBuilder.path("/users/{id}").buildAndExpand(newUser.getUserId()).toUri();
 
         return ResponseEntity.created(uri).body(user);
     }
