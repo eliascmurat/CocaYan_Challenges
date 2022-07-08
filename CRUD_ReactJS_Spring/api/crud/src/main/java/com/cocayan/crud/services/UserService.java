@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.cocayan.crud.entities.Contact;
 import com.cocayan.crud.entities.User;
 import com.cocayan.crud.repositories.UserRepository;
 
@@ -17,8 +16,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public Page<User> getAllUsers(Pageable paginacao) {
-        return userRepository.findAll(paginacao);
+    public Page<User> getAllUsers(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
 
     public Optional<User> getUserById(Long userId) {

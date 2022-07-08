@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.cocayan.crud.entities.Contact;
 import com.cocayan.crud.repositories.ContactRepository;
-import com.cocayan.crud.services.form.ContactForm;
 
 @Service
 public class ContactService {
@@ -23,19 +22,19 @@ public class ContactService {
         return contactRepository.save(contact);
     }
 
-    public Contact updateUser(Long contactId, Contact contact) {
+    public Contact updateContact(Long contactId, Contact contact) {
         Optional<Contact> optional = getContactById(contactId);
         if (optional.isPresent()) {
             Contact updatedContact = optional.get();
             updatedContact.setPhoneNumber(contact.getPhoneNumber());
-            
+
             return contactRepository.save(updatedContact);
         }
 
         return contact;
     }
 
-    public boolean deleteContact(Long contactId) {
+    public boolean deleteContact(Long contactId) {        
         Optional<Contact> optional = getContactById(contactId);
         if (optional.isPresent()) {
             contactRepository.deleteById(contactId);

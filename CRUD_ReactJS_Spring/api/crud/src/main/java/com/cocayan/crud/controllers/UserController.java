@@ -1,7 +1,6 @@
 package com.cocayan.crud.controllers;
 
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -51,7 +50,7 @@ public class UserController {
         ) Pageable pageable
     ) {
         Page<User> users = userService.getAllUsers(pageable);
-        return UserDto.listUserToListUserDto(users);
+        return UserDto.pageUserToPageUserDto(users);
     }
     
     @GetMapping("/{id}")
@@ -66,7 +65,10 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody @Valid UserForm userForm, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<UserDto> createUser(
+        @RequestBody @Valid UserForm userForm, 
+        UriComponentsBuilder uriBuilder
+    ) {
         User newUser = userForm.userFormToUser(userForm);
         userService.createUser(newUser);
         
@@ -75,38 +77,68 @@ public class UserController {
     }
 
     @PostMapping("/{userId}/contact")
-    public ResponseEntity<ContactDto> addContact(@PathVariable Long userId, @RequestBody @Valid ContactForm contactForm, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<ContactDto> addContact(
+        @PathVariable Long userId, 
+        @RequestBody @Valid ContactForm contactForm, 
+        UriComponentsBuilder uriBuilder
+    ) {
         Optional<User> optional = userService.getUserById(userId);
+
         if (optional.isPresent()) {        
             Contact newContact = contactForm.contactFormToContact(contactForm);
             newContact.setUser(optional.get());
             contactService.createContact(newContact);
             
-            URI uri = uriBuilder.path("/users/{id}/contact/{contactId}").buildAndExpand(optional.get().getUserId(), newContact.getContactId()).toUri();
+            URI uri = uriBuilder.path("/users/{userId}/contact/{contactId}").buildAndExpand(optional.get().getUserId(), newContact.getContactId()).toUri();
             return ResponseEntity.created(uri).body(new ContactDto(newContact));
         } else {
             return ResponseEntity.notFound().build();
         } 
     }
 
-    /*
-    @PutMapping(path = {"/{id}"})
-    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody @Valid User user) {
-        Optional<User> optional = userService.getUserById(id);
+    @PutMapping("/{userId}")
+    public ResponseEntity<UserDto> updateUser(
+        @PathVariable Long userId, 
+        @RequestBody @Valid UserForm userForm
+    ) {
+        Optional<User> optional = userService.getUserById(userId);
         
         if (optional.isPresent()) {
-            return ResponseEntity.ok(userService.updateUser(id, user));
+            User updatedUser = userForm.userFormToUser(userForm);
+            return ResponseEntity.ok(new UserDto(userService.updateUser(userId, updatedUser)));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+ 
+    @PutMapping("/{userId}/contact/{contactId}")
+    public ResponseEntity<ContactDto> updateContact(
+        @PathVariable Long userId, 
+        @PathVariable Long contactId, 
+        @RequestBody @Valid ContactForm contactForm
+    ) {
+        Optional<User> userOptional = userService.getUserById(userId);
+
+        if (userOptional.isPresent()) {
+            boolean hasContact = userOptional.get().getContactList().stream().anyMatch(c -> contactId.equals(c.getContactId()));
+            
+            if (hasContact) {
+                Contact updatedContact = contactForm.contactFormToContact(contactForm);
+                return ResponseEntity.ok(new ContactDto(contactService.updateContact(contactId, updatedContact)));
+            } else {
+                return ResponseEntity.notFound().build();
+            }
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @DeleteMapping(path = {"/{id}"})
-    public ResponseEntity<User> delete(@PathVariable Long id) {
-        Optional<User> optional = userService.getUserById(id);
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long userId) {
+        Optional<User> optional = userService.getUserById(userId);
         
         if (optional.isPresent()) {
-            if (userService.deleteUser(id)) {
+            if (userService.deleteUser(userId)) {
                 return ResponseEntity.ok().build();
             } else {
                 return ResponseEntity.noContent().build();
@@ -115,6 +147,32 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
-    */
 
+    @DeleteMapping("/{userId}/contact/{contactId}")
+    public ResponseEntity<?> deleteContact(
+        @PathVariable Long userId, 
+        @PathVariable Long contactId
+    ) {
+        Optional<User> userOptional = userService.getUserById(userId);
+        
+        if (userOptional.isPresent()) {
+            if (userOptional.get().hasContact(contactId)) {
+                Optional<Contact> contact = contactService.getContactById(contactId);
+
+                userOptional.get().getContactList().remove(contact.get());
+                userService.updateUser(userId, userOptional.get());
+
+                if (contactService.deleteContact(contactId)) {    
+                    return ResponseEntity.ok().build();
+                } else {
+                    return ResponseEntity.noContent().build();
+                }    
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
 }

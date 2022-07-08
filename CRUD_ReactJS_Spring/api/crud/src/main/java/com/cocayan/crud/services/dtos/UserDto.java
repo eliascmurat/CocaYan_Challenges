@@ -24,7 +24,7 @@ public class UserDto {
         this.contactList.addAll(user.getContactList().stream().map(ContactDto::new).collect(Collectors.toList()));
     }
 
-    public static Page<UserDto> listUserToListUserDto(Page<User> users) {
+    public static Page<UserDto> pageUserToPageUserDto(Page<User> users) {
         return users.map(UserDto::new);
     }
 }
