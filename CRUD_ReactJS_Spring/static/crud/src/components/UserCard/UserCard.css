@@ -1,0 +1,64 @@
+.card__container {
+  display: flex;
+  width: 400px;
+  height: auto;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px auto;
+  padding: 10px 30px;
+  border-radius: 40px;
+  background: #ecf0f3;
+  box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff;
+}
+
+.card__description-text {
+  font-size: 1.4rem;
+  color: #383838;
+}
+
+.card__description,
+.card__description-details,
+.card__description-details-phoneNumber {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+summary {
+  cursor: pointer;
+}
+
+.card__description-details {
+  padding-left: 10px;
+}
+
+.card__description-details-phoneNumber {
+  padding-left: 20px;
+}
+
+.card__actions {
+  display: flex;
+  flex-direction: row;
+  margin-top: 4px;
+  gap: 10px;
+}
+
+.card__actions button{
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  background: #ecf0f3;
+  box-shadow: 10px 10px 20px #cbced1, -2px -2px 8px #ffffff;
+  transition: 0.2s;
+}
+
+.card__actions-contact:hover,
+.card__actions-edit:hover {
+  background: #0466c8;
+  color: #FFF;
+}
+
+.card__actions-delete:hover {
+  background: #d90429;
+  color: #FFF;
+}
