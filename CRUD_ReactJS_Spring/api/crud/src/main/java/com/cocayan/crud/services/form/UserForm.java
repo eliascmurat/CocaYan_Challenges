@@ -15,6 +15,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserForm {
+
+    private Long userId;
     
     @NotNull
     @Length(max = 100, min = 2)

@@ -11,9 +11,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ContactForm {
+
+    private Long contactId;
+
     @NotNull
     @NotEmpty
     private String phoneNumber;
+
+    private Long userId;
 
     public ContactForm() { }
 
