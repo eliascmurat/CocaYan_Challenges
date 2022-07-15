@@ -14,7 +14,7 @@ import br.com.cocayan.swapi.entities.People;
 @RestController
 @RequestMapping("/people")
 public class PeopleController {
-    
+
     @GetMapping
     public String getAllPeople() {
         return "chamando get all people";
