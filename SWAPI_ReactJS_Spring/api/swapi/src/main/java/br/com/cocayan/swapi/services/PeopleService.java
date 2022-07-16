@@ -28,7 +28,7 @@ public class PeopleService {
 
     public People createPeople(People people) {
         people.setPeopleId((long) (peoples.size() + 1));
-        peoples.add(people);
+        peoples.add(people);        
         return people;
     } 
 
