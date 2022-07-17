@@ -1,8 +1,6 @@
 package br.com.cocayan.swapi.entities;
 
-import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import java.time.LocalDateTime;
 
 import lombok.Data;
 
@@ -17,11 +15,9 @@ public class People {
 
     private float mass;
 
-    @DateTimeFormat(pattern = "YYYY-MM-dd HH:mm:ss")
-    private Date created = new Date();
+    private LocalDateTime created = LocalDateTime.now();
     
-    @DateTimeFormat(pattern = "YYYY-MM-dd HH:mm:ss")
-    private Date updated = new Date();
+    private LocalDateTime updated = LocalDateTime.now();
 
     public People(String name, float height, float mass) {
         this.name = name;

@@ -1,6 +1,6 @@
 package br.com.cocayan.swapi.entities.dtos;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -22,11 +22,11 @@ public class PeopleDto {
     
     private float mass;
                             
-    @JsonFormat(pattern = "YYYY-MM-dd HH:mm:ss.SSSSSSX")
-    private Date created;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'")
+    private LocalDateTime created;
     
-    @JsonFormat(pattern = "YYYY-MM-dd HH:mm:ss.SSSSSSX")
-    private Date updated;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'")
+    private LocalDateTime updated;
 
     public static PeopleDto convertPeopleToPeopleDto(People people) {
         PeopleDto peopleDto = new PeopleDto();
