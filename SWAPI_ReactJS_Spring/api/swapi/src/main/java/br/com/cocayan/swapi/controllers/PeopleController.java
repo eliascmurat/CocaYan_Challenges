@@ -1,11 +1,12 @@
 package br.com.cocayan.swapi.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,18 +30,16 @@ public class PeopleController {
     PeopleService peopleService;
 
     @GetMapping
-    public List<PeopleDto> getAllPeople() {
-        List<PeopleDto> peopleDtoList = new ArrayList<>();
-        for (People people : peopleService.getAllPeople()) {
-            try {
-                peopleDtoList.add(PeopleDto.convertPeopleToPeopleDto(people));
-            } catch (Exception e) {
-                System.err.println(e);
-                return peopleDtoList;
-            }
-        }
-
-        return peopleDtoList;
+    public Page<PeopleDto> getAllPeople(
+        @PageableDefault(
+            sort = "peopleId", 
+            direction = Direction.ASC, 
+            page = 0, 
+            size = 10
+        ) Pageable pageable
+    ) {
+        Page<People> peoples = peopleService.getAllPeople(pageable);
+        return PeopleDto.pagePeopleToPagePeopleDto(peoples);
     }
 
     @GetMapping("/{peopleId}")

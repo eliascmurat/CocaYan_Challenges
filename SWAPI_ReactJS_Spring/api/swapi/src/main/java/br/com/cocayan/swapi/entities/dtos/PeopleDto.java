@@ -2,6 +2,8 @@ package br.com.cocayan.swapi.entities.dtos;
 
 import java.time.LocalDateTime;
 
+import org.springframework.data.domain.Page;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.cocayan.swapi.entities.People;
@@ -28,6 +30,15 @@ public class PeopleDto {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'")
     private LocalDateTime updated;
 
+    public PeopleDto(People people) {
+        this.peopleId = people.getPeopleId();
+        this.name = people.getName();
+        this.height = people.getHeight();
+        this.mass = people.getMass();
+        this.created = people.getCreated();
+        this.updated = people.getUpdated();
+    }
+
     public static PeopleDto convertPeopleToPeopleDto(People people) {
         PeopleDto peopleDto = new PeopleDto();
         peopleDto.setPeopleId(people.getPeopleId());
@@ -38,6 +49,10 @@ public class PeopleDto {
         peopleDto.setUpdated(people.getUpdated());
 
         return peopleDto;
+    }
+
+    public static Page<PeopleDto> pagePeopleToPagePeopleDto(Page<People> peoples) {
+        return peoples.map(PeopleDto::new);
     }
 
 }

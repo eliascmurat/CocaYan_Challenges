@@ -3,6 +3,9 @@ package br.com.cocayan.swapi.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.cocayan.swapi.entities.People;
@@ -12,8 +15,9 @@ public class PeopleService {
     
     List<People> peoples = new ArrayList<>();
 
-    public List<People> getAllPeople() {
-        return peoples;
+    public Page<People> getAllPeople(Pageable pageable) {
+        Page<People> page = new PageImpl<>(peoples);
+        return page;
     } 
 
     public People getPeopleById(Long peopleId) {
