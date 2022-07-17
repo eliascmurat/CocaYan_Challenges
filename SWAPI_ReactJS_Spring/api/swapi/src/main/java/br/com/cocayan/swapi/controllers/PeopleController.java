@@ -3,6 +3,8 @@ package br.com.cocayan.swapi.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,7 +60,7 @@ public class PeopleController {
     }
 
     @PostMapping
-    public PeopleDto createPeople(@RequestBody CreatePeopleDto createPeopleDto) {
+    public PeopleDto createPeople(@RequestBody @Valid CreatePeopleDto createPeopleDto) {
         People people = new People(
             createPeopleDto.getName(), 
             createPeopleDto.getHeight(), 
@@ -69,7 +71,7 @@ public class PeopleController {
     }
 
     @PutMapping
-    public String updatePeople(@RequestBody UpdatePeopleDto updatePeopleDto) {
+    public String updatePeople(@RequestBody @Valid UpdatePeopleDto updatePeopleDto) {
         People people = new People(
             updatePeopleDto.getPeopleId(), 
             updatePeopleDto.getName(), 
