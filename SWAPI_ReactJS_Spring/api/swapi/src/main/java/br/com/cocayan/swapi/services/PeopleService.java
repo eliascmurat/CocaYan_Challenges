@@ -1,63 +1,56 @@
 package br.com.cocayan.swapi.services;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.cocayan.swapi.entities.People;
+import br.com.cocayan.swapi.repositories.PeopleRepository;
 
 @Service
 public class PeopleService {
     
-    List<People> peoples = new ArrayList<>();
+    @Autowired
+    PeopleRepository peopleRepository;
 
-    public Page<People> getAllPeople(Pageable pageable) {
-        Page<People> page = new PageImpl<>(peoples);
-        return page;
+    public Page<People> getAllPeoples(Pageable pageable) {
+        return peopleRepository.findAll(pageable);
     } 
 
-    public People getPeopleById(Long peopleId) {
-        for (People p : peoples) {
-            if (p.getPeopleId() == peopleId) {
-                return p;
-            }
-        }
-
-        return null;
+    public Optional<People> getPeopleById(Long peopleId) {
+        return peopleRepository.findById(peopleId);
     } 
 
-    public People createPeople(People people) {
-        people.setPeopleId((long) (peoples.size() + 1));
-        peoples.add(people);        
-        return people;
+    public People createPeople(People people) {   
+        return peopleRepository.save(people);
     } 
 
     public People updatePeople(People people) {
-        for (People p : peoples) {
-            if (p.getPeopleId() == people.getPeopleId()) {
-                p.setName(people.getName());
-                p.setHeight(people.getHeight());
-                p.setMass(people.getMass());
+        Optional<People> optional = peopleRepository.findById(people.getPeopleId());
+        if (optional.isPresent()) {
+            People updatePeople = optional.get();
+            updatePeople.setName(people.getName()); 
+            updatePeople.setHeight(people.getHeight()); 
+            updatePeople.setMass(people.getMass());
+            updatePeople.setUpdated(people.getUpdated());
 
-                return p;
-            }
+            return peopleRepository.save(updatePeople);
         }
 
-        return null;
+        return people;
     }
 
     public boolean deletePeople(Long peopleId) {
-        for (People p : peoples) {
-            if (p.getPeopleId() == peopleId) {
-                peoples.remove(p);
-                return true;
-            }
+        Optional<People> optional = peopleRepository.findById(peopleId);
+        if (optional.isPresent()) {
+            peopleRepository.deleteById(peopleId);
+            
+            return true;
         }
-
+        
         return false;
     } 
 }

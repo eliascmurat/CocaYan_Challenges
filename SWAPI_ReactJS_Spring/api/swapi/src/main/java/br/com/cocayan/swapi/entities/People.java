@@ -10,15 +10,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @Table(name = "people")
 @Entity
 public class People {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "peopleid")
+    @Column(name = "peopleId")
     private Long peopleId;
 
     @Column(name = "name")
@@ -31,10 +33,10 @@ public class People {
     private float mass;
 
     @Column(name = "created")
-    private LocalDateTime created;
+    private LocalDateTime created = LocalDateTime.now();
     
     @Column(name = "updated")
-    private LocalDateTime updated;
+    private LocalDateTime updated = LocalDateTime.now();
 
     public People(String name, float height, float mass) {
         this.name = name;

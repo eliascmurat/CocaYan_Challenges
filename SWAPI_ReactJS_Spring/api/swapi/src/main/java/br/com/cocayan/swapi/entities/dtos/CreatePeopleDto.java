@@ -4,6 +4,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
+import br.com.cocayan.swapi.entities.People;
 import lombok.Data;
 
 @Data
@@ -23,4 +24,11 @@ public class CreatePeopleDto {
         this.mass = mass;
     }
 
+    public People createPeopleDtoToPeople(CreatePeopleDto createPeopleDto) {
+        return new People(
+            createPeopleDto.getName(), 
+            createPeopleDto.getHeight(), 
+            createPeopleDto.getMass()
+        );
+    }
 }

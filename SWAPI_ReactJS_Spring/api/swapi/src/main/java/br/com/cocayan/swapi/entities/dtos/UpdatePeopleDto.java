@@ -4,6 +4,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
+import br.com.cocayan.swapi.entities.People;
+
 import lombok.Data;
 
 @Data
@@ -27,4 +29,12 @@ public class UpdatePeopleDto {
         this.mass = mass;
     }
 
+    public People updatePeopleDtoToPeople(UpdatePeopleDto updatePeopleDto) {
+        return new People(
+            updatePeopleDto.getPeopleId(),
+            updatePeopleDto.getName(), 
+            updatePeopleDto.getHeight(), 
+            updatePeopleDto.getMass()
+        );
+    }
 }
