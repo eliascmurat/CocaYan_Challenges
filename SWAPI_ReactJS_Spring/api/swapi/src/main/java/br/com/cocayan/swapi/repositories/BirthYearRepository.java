@@ -3,7 +3,7 @@ package br.com.cocayan.swapi.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.cocayan.swapi.entities.Gender;
+import br.com.cocayan.swapi.entities.BirthYear;
 
 @Repository
-public interface GenderRepository extends JpaRepository<Gender, Long> { }
+public interface BirthYearRepository extends JpaRepository<BirthYear, Long> { }
