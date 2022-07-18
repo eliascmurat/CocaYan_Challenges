@@ -39,19 +39,12 @@ public class PeopleDto {
         this.mass = people.getMass();
         this.created = people.getCreated();
         this.updated = people.getUpdated();
-        this.gender = people.getGender().getName();
-    }
 
-    public static PeopleDto convertPeopleToPeopleDto(People people) {
-        PeopleDto peopleDto = new PeopleDto();
-        peopleDto.setPeopleId(people.getPeopleId());
-        peopleDto.setName(people.getName());
-        peopleDto.setHeight(people.getHeight());
-        peopleDto.setMass(people.getMass());
-        peopleDto.setCreated(people.getCreated());
-        peopleDto.setUpdated(people.getUpdated());
-
-        return peopleDto;
+        if (people.getGender() != null) {
+            this.gender = people.getGender().getName();
+        } else {
+            this.gender = "n/a";
+        }
     }
 
     public static Page<PeopleDto> pagePeopleToPagePeopleDto(Page<People> peoples) {
