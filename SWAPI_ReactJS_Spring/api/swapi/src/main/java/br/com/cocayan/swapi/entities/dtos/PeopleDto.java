@@ -30,6 +30,8 @@ public class PeopleDto {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'")
     private LocalDateTime updated;
 
+    private String gender;
+
     public PeopleDto(People people) {
         this.peopleId = people.getPeopleId();
         this.name = people.getName();
@@ -37,6 +39,7 @@ public class PeopleDto {
         this.mass = people.getMass();
         this.created = people.getCreated();
         this.updated = people.getUpdated();
+        this.gender = people.getGender().getName();
     }
 
     public static PeopleDto convertPeopleToPeopleDto(People people) {

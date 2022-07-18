@@ -1,8 +1,7 @@
 package br.com.cocayan.swapi.entities.dtos;
 
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Length;
+import javax.validation.constraints.Size;
 
 import br.com.cocayan.swapi.entities.People;
 import lombok.Data;
@@ -11,7 +10,7 @@ import lombok.Data;
 public class CreatePeopleDto {
 
     @NotNull
-    @Length(min = 2, max = 100)
+    @Size(min = 2, max = 100)
     private String name;
 
     private float height;

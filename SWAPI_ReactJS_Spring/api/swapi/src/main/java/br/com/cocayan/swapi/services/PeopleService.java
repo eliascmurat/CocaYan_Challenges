@@ -36,6 +36,7 @@ public class PeopleService {
             updatePeople.setHeight(people.getHeight()); 
             updatePeople.setMass(people.getMass());
             updatePeople.setUpdated(people.getUpdated());
+            updatePeople.setGender(people.getGender());
 
             return peopleRepository.save(updatePeople);
         }

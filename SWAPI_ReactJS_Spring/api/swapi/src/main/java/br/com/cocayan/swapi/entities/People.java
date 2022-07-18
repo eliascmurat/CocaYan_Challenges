@@ -2,11 +2,14 @@ package br.com.cocayan.swapi.entities;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -37,6 +40,10 @@ public class People {
     
     @Column(name = "updated")
     private LocalDateTime updated = LocalDateTime.now();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "genderId", referencedColumnName = "genderId")
+    private Gender gender;
 
     public People(String name, float height, float mass) {
         this.name = name;
