@@ -30,7 +30,7 @@ public class GenderController {
     GenderService genderService;
     
     @GetMapping
-    public Page<Gender> getAllGender(
+    public Page<Gender> getAllGenders(
         @PageableDefault(
             sort = "genderId", 
             direction = Direction.ASC, 
@@ -38,8 +38,7 @@ public class GenderController {
             size = 10
         ) Pageable pageable
     ) {
-        Page<Gender> genders = genderService.getAllGenders(pageable);
-        return genders;
+        return genderService.getAllGenders(pageable);
     }
     
     @GetMapping("/{genderId}")
@@ -66,9 +65,9 @@ public class GenderController {
 
     @PutMapping
     public ResponseEntity<Gender> updateGender(@RequestBody Gender gender) {
-        Optional<Gender> optionalGender = genderService.getGenderById(gender.getGenderId());
+        Optional<Gender> optional = genderService.getGenderById(gender.getGenderId());
 
-        if (optionalGender.isPresent()) {
+        if (optional.isPresent()) {
             return ResponseEntity.ok(genderService.updateGender(gender));
         } else {
             return ResponseEntity.notFound().build();
