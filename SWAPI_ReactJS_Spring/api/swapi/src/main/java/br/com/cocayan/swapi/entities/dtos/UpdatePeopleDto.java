@@ -23,6 +23,8 @@ public class UpdatePeopleDto {
 
     private Long genderId;
 
+    private Long birthYearId;
+
     public UpdatePeopleDto(Long peopleId, String name, float height, float mass) {
         this.peopleId = peopleId;
         this.name = name;

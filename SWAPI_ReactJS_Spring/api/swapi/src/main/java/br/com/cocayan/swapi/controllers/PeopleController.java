@@ -21,11 +21,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.cocayan.swapi.entities.BirthYear;
 import br.com.cocayan.swapi.entities.Gender;
 import br.com.cocayan.swapi.entities.People;
 import br.com.cocayan.swapi.entities.dtos.CreatePeopleDto;
 import br.com.cocayan.swapi.entities.dtos.PeopleDto;
 import br.com.cocayan.swapi.entities.dtos.UpdatePeopleDto;
+import br.com.cocayan.swapi.services.BirthYearService;
 import br.com.cocayan.swapi.services.GenderService;
 import br.com.cocayan.swapi.services.PeopleService;
 
@@ -38,6 +40,9 @@ public class PeopleController {
 
     @Autowired
     GenderService genderService;
+    
+    @Autowired
+    BirthYearService birthYearService;
 
     @GetMapping
     public Page<PeopleDto> getAllPeople(
@@ -79,10 +84,16 @@ public class PeopleController {
     public ResponseEntity<PeopleDto> updatePeople(@RequestBody @Valid UpdatePeopleDto updatePeopleDto) {
         Optional<People> optionalPeople = peopleService.getPeopleById(updatePeopleDto.getPeopleId());
         Optional<Gender> optionalGender = genderService.getGenderById(updatePeopleDto.getGenderId());
+        Optional<BirthYear> optionalBirthYear = birthYearService.getBirthYearById(updatePeopleDto.getBirthYearId());
 
-        if (optionalPeople.isPresent() && optionalGender.isPresent()) {
+        if (
+            optionalPeople.isPresent() && 
+            optionalGender.isPresent() &&
+            optionalBirthYear.isPresent()
+        ) {
             People people = updatePeopleDto.updatePeopleDtoToPeople(updatePeopleDto);
             people.setGender(optionalGender.get());
+            people.setBirthYear(optionalBirthYear.get());
 
             return ResponseEntity.ok(new PeopleDto(peopleService.updatePeople(people)));
         } else {

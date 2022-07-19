@@ -41,6 +41,10 @@ public class PeopleService {
                 updatePeople.setGender(people.getGender());
             }
 
+            if (people.getBirthYear() != null) {
+                updatePeople.setBirthYear(people.getBirthYear());
+            }
+
             return peopleRepository.save(updatePeople);
         }
 
