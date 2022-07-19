@@ -1,6 +1,8 @@
 package br.com.cocayan.swapi.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -50,6 +53,9 @@ public class People {
     @OneToOne
     @JoinColumn(name = "birthYearId")
     private BirthYear birthYear;
+
+    @OneToMany(mappedBy = "people")
+    private List<HairPeople> hairPeoples = new ArrayList<>();
 
     public People(String name, float height, float mass) {
         this.name = name;

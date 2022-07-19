@@ -1,6 +1,7 @@
 package br.com.cocayan.swapi.entities.dtos;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 
@@ -32,6 +33,10 @@ public class PeopleDto {
 
     private String gender;
 
+    private String birthYear;
+
+    private List<String> hairPeople;
+
     public PeopleDto(People people) {
         this.peopleId = people.getPeopleId();
         this.name = people.getName();
@@ -45,6 +50,19 @@ public class PeopleDto {
         } else {
             this.gender = "n/a";
         }
+
+        if (people.getBirthYear() != null) {
+            this.birthYear = people.getBirthYear().getYear() + people.getBirthYear().getAge();
+        } else {
+            this.gender = "unknown";
+        }
+
+        // TODO: como pegar as cores e exibir em array no json
+        // if (people.getHairPeoples() != null) {
+        //     System.out.println(people.getHairPeoples().toString());
+        // } else {
+        //     this.hairPeople.add("unknown");
+        // }
     }
 
     public static Page<PeopleDto> pagePeopleToPagePeopleDto(Page<People> peoples) {
