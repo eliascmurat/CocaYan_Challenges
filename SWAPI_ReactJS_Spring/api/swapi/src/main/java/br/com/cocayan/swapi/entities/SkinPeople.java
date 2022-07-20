@@ -18,10 +18,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "hairPeople")
+@Table(name = "skinPeople")
 @Entity
-public class HairPeople implements Serializable {
-
+public class SkinPeople implements Serializable {
+       
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ManyToOne(fetch = FetchType.LAZY)
@@ -32,6 +32,6 @@ public class HairPeople implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "peopleId", referencedColumnName = "peopleId")
-    private People people;
+    private People people; 
 
 }

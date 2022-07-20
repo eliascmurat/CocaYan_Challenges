@@ -18,10 +18,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "hairPeople")
+@Table(name = "eyePeople")
 @Entity
-public class HairPeople implements Serializable {
-
+public class EyePeople implements Serializable {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ManyToOne(fetch = FetchType.LAZY)

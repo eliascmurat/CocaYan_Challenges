@@ -36,6 +36,10 @@ public class PeopleDto {
 
     private String hairPeople;
 
+    private String skinPeople;
+
+    private String eyePeople;
+
     public PeopleDto(People people) {
         this.peopleId = people.getPeopleId();
         this.name = people.getName();
@@ -51,18 +55,63 @@ public class PeopleDto {
         }
 
         if (people.getBirthYear() != null) {
-            this.birthYear = people.getBirthYear().getYear() + people.getBirthYear().getAge();
+            String year = people.getBirthYear().getYear();
+            year = year.substring(0, year.indexOf("-"));
+
+            this.birthYear = year + people.getBirthYear().getAge();
         } else {
             this.gender = "unknown";
         }
 
         if (people.getHairPeople().size() > 0) {            
-            people.getHairPeople().forEach(item -> {
-                this.hairPeople = item.getColor().getName();
-            });
+            StringBuffer stringBuffer = new StringBuffer();
+            int arraySize = people.getHairPeople().size();
+
+            for (int i = 0; i < arraySize; i++) {
+                String color = people.getHairPeople().get(i).getColor().getName();
+                stringBuffer.append(fomatedText(color, i, arraySize));
+            }
+
+            this.hairPeople = stringBuffer.toString();
         } else {
             this.hairPeople = "unknown";
         }
+
+        if (people.getSkinPeople().size() > 0) {            
+            StringBuffer stringBuffer = new StringBuffer();
+            int arraySize = people.getSkinPeople().size();
+
+            for (int i = 0; i < arraySize; i++) {
+                String color = people.getSkinPeople().get(i).getColor().getName();
+                stringBuffer.append(fomatedText(color, i, arraySize));
+            }
+
+            this.skinPeople = stringBuffer.toString();
+        } else {
+            this.skinPeople = "unknown";
+        }
+
+        if (people.getEyePeople().size() > 0) {            
+            StringBuffer stringBuffer = new StringBuffer();
+            int arraySize = people.getEyePeople().size();
+
+            for (int i = 0; i < arraySize; i++) {
+                String color = people.getEyePeople().get(i).getColor().getName();
+                stringBuffer.append(fomatedText(color, i, arraySize));
+            }
+
+            this.eyePeople = stringBuffer.toString();
+        } else {
+            this.eyePeople = "unknown";
+        }
+    }
+
+    public String fomatedText(String text, int index, int arraySize) {
+        if (index != (arraySize - 1)) {
+            text += ", ";
+        }
+
+        return text;
     }
 
     public static Page<PeopleDto> pagePeopleToPagePeopleDto(Page<People> peoples) {

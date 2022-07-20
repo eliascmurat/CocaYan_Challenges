@@ -16,8 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -58,6 +56,11 @@ public class People {
     private BirthYear birthYear;
     
     @OneToMany(mappedBy = "people", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<HairPeople> hairPeople = new ArrayList<>();
+
+    @OneToMany(mappedBy = "people", cascade = CascadeType.ALL)
+    private List<SkinPeople> skinPeople = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "people", cascade = CascadeType.ALL)
+    private List<EyePeople> eyePeople = new ArrayList<>();
 }
