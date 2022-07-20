@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -53,21 +56,8 @@ public class People {
     @OneToOne
     @JoinColumn(name = "birthYearId")
     private BirthYear birthYear;
-
-    @OneToMany(mappedBy = "people")
-    private List<HairPeople> hairPeoples = new ArrayList<>();
-
-    public People(String name, float height, float mass) {
-        this.name = name;
-        this.height = height;
-        this.mass = mass;
-    }
-
-    public People(Long peopleId, String name, float height, float mass) {
-        this.peopleId = peopleId;
-        this.name = name;
-        this.height = height;
-        this.mass = mass;
-    }
     
+    @OneToMany(mappedBy = "people", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<HairPeople> hairPeople = new ArrayList<>();
 }

@@ -4,9 +4,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import br.com.cocayan.swapi.entities.People;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CreatePeopleDto {
 
     @NotNull
@@ -17,17 +21,12 @@ public class CreatePeopleDto {
 
     private float mass;
 
-    public CreatePeopleDto(String name, float height, float mass) {
-        this.name = name;
-        this.height = height;
-        this.mass = mass;
-    }
-
     public People createPeopleDtoToPeople(CreatePeopleDto createPeopleDto) {
-        return new People(
-            createPeopleDto.getName(), 
-            createPeopleDto.getHeight(), 
-            createPeopleDto.getMass()
-        );
+        People people = new People();
+        people.setName(createPeopleDto.getName());
+        people.setHeight(createPeopleDto.getHeight());
+        people.setMass(createPeopleDto.getMass());
+
+        return people;
     }
 }

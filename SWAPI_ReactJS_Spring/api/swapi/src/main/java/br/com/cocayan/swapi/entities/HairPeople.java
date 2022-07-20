@@ -1,6 +1,9 @@
 package br.com.cocayan.swapi.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -8,19 +11,31 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "hairPeople")
 @Entity
-public class HairPeople {
+public class HairPeople implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long hairPeopleId;
-
-    @ManyToOne
-    @JoinColumn(name = "colorId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "colorId", referencedColumnName = "colorId")
+    @JsonBackReference
     private Color color;
 
-    @ManyToOne
-    @JoinColumn(name = "peopleId")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "peopleId", referencedColumnName = "peopleId")
+    @JsonBackReference
     private People people;
+
 }
