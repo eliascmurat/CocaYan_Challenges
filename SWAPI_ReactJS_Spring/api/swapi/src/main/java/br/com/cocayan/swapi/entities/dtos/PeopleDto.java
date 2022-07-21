@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import org.springframework.data.domain.Page;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import br.com.cocayan.swapi.entities.People;
 import lombok.AllArgsConstructor;
@@ -16,6 +18,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PeopleDto {
 
+    // @JsonProperty("people_id")
+    @JsonIgnore
     private Long peopleId;
 
     private String name;
@@ -23,45 +27,32 @@ public class PeopleDto {
     private float height;
     
     private float mass;
+
+    @JsonProperty("hair_color")
+    private String hairPeople;
+
+    @JsonProperty("skin_color")
+    private String skinPeople;
+
+    @JsonProperty("eye_color")
+    private String eyePeople;
+    
+    @JsonProperty("birth_year")
+    private String birthYear;
                             
+    private String gender;
+
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'")
     private LocalDateTime created;
     
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'")
     private LocalDateTime updated;
 
-    private String gender;
-
-    private String birthYear;
-
-    private String hairPeople;
-
-    private String skinPeople;
-
-    private String eyePeople;
-
     public PeopleDto(People people) {
         this.peopleId = people.getPeopleId();
         this.name = people.getName();
         this.height = people.getHeight();
         this.mass = people.getMass();
-        this.created = people.getCreated();
-        this.updated = people.getUpdated();
-
-        if (people.getGender() != null) {
-            this.gender = people.getGender().getName();
-        } else {
-            this.gender = "n/a";
-        }
-
-        if (people.getBirthYear() != null) {
-            String year = people.getBirthYear().getYear();
-            year = year.substring(0, year.indexOf("-"));
-
-            this.birthYear = year + people.getBirthYear().getAge();
-        } else {
-            this.gender = "unknown";
-        }
 
         if (people.getHairPeople().size() > 0) {            
             StringBuffer stringBuffer = new StringBuffer();
@@ -104,6 +95,24 @@ public class PeopleDto {
         } else {
             this.eyePeople = "unknown";
         }
+
+        if (people.getBirthYear() != null) {
+            String year = people.getBirthYear().getYear();
+            year = year.substring(0, year.indexOf("-"));
+
+            this.birthYear = year + people.getBirthYear().getAge();
+        } else {
+            this.gender = "unknown";
+        }
+        
+        if (people.getGender() != null) {
+            this.gender = people.getGender().getName();
+        } else {
+            this.gender = "n/a";
+        }
+
+        this.created = people.getCreated();
+        this.updated = people.getUpdated();
     }
 
     public String fomatedText(String text, int index, int arraySize) {

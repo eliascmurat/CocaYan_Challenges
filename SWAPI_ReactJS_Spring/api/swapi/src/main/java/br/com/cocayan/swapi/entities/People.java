@@ -35,26 +35,12 @@ public class People {
     @Column(name = "name")
     private String name;
     
-    @Column(name = "height")
+    @Column(name = "height", precision = 10, scale = 2)
     private float height;
 
-    @Column(name = "mass")
+    @Column(name = "mass", precision = 10, scale = 2)
     private float mass;
 
-    @Column(name = "created")
-    private LocalDateTime created = LocalDateTime.now();
-    
-    @Column(name = "updated")
-    private LocalDateTime updated = LocalDateTime.now();
-
-    @ManyToOne
-    @JoinColumn(name = "genderId")
-    private Gender gender;
-
-    @OneToOne
-    @JoinColumn(name = "birthYearId")
-    private BirthYear birthYear;
-    
     @OneToMany(mappedBy = "people", cascade = CascadeType.ALL)
     private List<HairPeople> hairPeople = new ArrayList<>();
 
@@ -63,4 +49,19 @@ public class People {
     
     @OneToMany(mappedBy = "people", cascade = CascadeType.ALL)
     private List<EyePeople> eyePeople = new ArrayList<>();
+    
+    @OneToOne
+    @JoinColumn(name = "birthYearId")
+    private BirthYear birthYear;
+
+    @ManyToOne
+    @JoinColumn(name = "genderId")
+    private Gender gender;
+
+    @Column(name = "created")
+    private LocalDateTime created = LocalDateTime.now();
+    
+    @Column(name = "updated")
+    private LocalDateTime updated = LocalDateTime.now();
+
 }
