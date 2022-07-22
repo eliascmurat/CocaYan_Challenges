@@ -21,12 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.cocayan.swapi.entities.BirthYear;
-import br.com.cocayan.swapi.entities.Gender;
-import br.com.cocayan.swapi.entities.People;
-import br.com.cocayan.swapi.entities.dtos.CreatePeopleDto;
-import br.com.cocayan.swapi.entities.dtos.PeopleDto;
-import br.com.cocayan.swapi.entities.dtos.UpdatePeopleDto;
+import br.com.cocayan.swapi.entities.people.BirthYear;
+import br.com.cocayan.swapi.entities.people.Gender;
+import br.com.cocayan.swapi.entities.people.People;
+import br.com.cocayan.swapi.entities.people.dtos.CreatePeopleDto;
+import br.com.cocayan.swapi.entities.people.dtos.PeopleDto;
+import br.com.cocayan.swapi.entities.people.dtos.UpdatePeopleDto;
 import br.com.cocayan.swapi.services.BirthYearService;
 import br.com.cocayan.swapi.services.GenderService;
 import br.com.cocayan.swapi.services.PeopleService;

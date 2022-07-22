@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.cocayan.swapi.entities.Gender;
+import br.com.cocayan.swapi.entities.people.Gender;
 import br.com.cocayan.swapi.services.GenderService;
 
 @RestController

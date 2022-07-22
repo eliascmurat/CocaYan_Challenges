@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.cocayan.swapi.entities.BirthYear;
+import br.com.cocayan.swapi.entities.people.BirthYear;
 import br.com.cocayan.swapi.repositories.BirthYearRepository;
 
 @Service
