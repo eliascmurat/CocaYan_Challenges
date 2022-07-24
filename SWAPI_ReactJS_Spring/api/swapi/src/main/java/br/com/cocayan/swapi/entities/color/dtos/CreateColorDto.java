@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CreateColorDto {
     
-    @NotNull
-    @Size(min = 3, max = 50)
+    @NotNull(message = "Nome da cor não pode ser nulo!")
+    @Size(min = 3, max = 50, message = "Nome da cor deve ter entre 3 a 50 caracteres")
     private String name;
 
     public Color createColorDtoToColor(CreateColorDto createColorDto) {

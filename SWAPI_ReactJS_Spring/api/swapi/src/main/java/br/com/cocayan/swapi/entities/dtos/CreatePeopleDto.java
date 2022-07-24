@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CreatePeopleDto {
 
-    @NotNull
-    @Size(min = 2, max = 100)
+    @NotNull(message = "Nome da pessoa não pode ser nulo!")
+    @Size(min = 2, max = 100, message = "Nome da pessoa deve ter entre 2 a 100 caracteres")
     private String name;
 
     private float height;

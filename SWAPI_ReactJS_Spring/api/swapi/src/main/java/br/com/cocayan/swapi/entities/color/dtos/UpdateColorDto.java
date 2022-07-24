@@ -13,11 +13,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UpdateColorDto {
     
-    @NotNull
+    @NotNull(message = "ID não pode ser nulo!")
     private Long colorId;
     
-    @NotNull
-    @Size(min = 3, max = 100)
+    @NotNull(message = "Nome da cor não pode ser nulo!")
+    @Size(min = 3, max = 100, message = "Nome da cor deve ter entre 3 a 50 caracteres")
     private String name;
 
     public Color updateColorDtoToColor(UpdateColorDto updateColorDto) {
