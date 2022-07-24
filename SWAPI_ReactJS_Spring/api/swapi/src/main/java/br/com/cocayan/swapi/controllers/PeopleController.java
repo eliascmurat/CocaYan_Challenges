@@ -82,9 +82,9 @@ public class PeopleController {
 
     @PutMapping
     public ResponseEntity<PeopleDto> updatePeople(@RequestBody @Valid UpdatePeopleDto updatePeopleDto) {
-        Optional<People> optionalPeople = peopleService.getPeopleById(updatePeopleDto.getPeopleId());
-        Optional<Gender> optionalGender = genderService.getGenderById(updatePeopleDto.getGenderId());
+        Optional<People> optionalPeople = peopleService.getPeopleById(updatePeopleDto.getPeopleId());        
         Optional<BirthYear> optionalBirthYear = birthYearService.getBirthYearById(updatePeopleDto.getBirthYearId());
+        Optional<Gender> optionalGender = genderService.getGenderById(updatePeopleDto.getGenderId());
 
         if (
             optionalPeople.isPresent() && 

@@ -24,9 +24,9 @@ public class UpdatePeopleDto {
 
     private float mass;
 
-    private Long genderId;
-
     private Long birthYearId;
+    
+    private Long genderId;
 
     public People updatePeopleDtoToPeople(UpdatePeopleDto updatePeopleDto) {
         People people = new People();
