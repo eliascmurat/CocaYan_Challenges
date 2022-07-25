@@ -10,15 +10,13 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
-        // Lista que vai ser passada como param no construtor da Class Clock
-        List<LocalTime> times = new ArrayList<>();
+        List<Time> times = new ArrayList<>();
 
-        // Add tempo do "alarme"
-        times.add(LocalTime.parse("11:59:00"));
-        times.add(LocalTime.parse("12:00:00"));
+        // Trocar horario aqui
+        times.add(new Time("Boa dia", LocalTime.parse("08:00:00")));
+        times.add(new Time("Boa tarde", LocalTime.parse("12:00:00")));
+        times.add(new Time("Boa noite", LocalTime.parse("19:00:00")));
 
-        // Cria Thread passando a classe Clock com implements Runnable como param e
-        // na classe Clock passando a lista de horarios
         new Thread(new Clock(times)).start();
     }
 }
