@@ -14,8 +14,8 @@ public class Main {
         List<LocalTime> times = new ArrayList<>();
 
         // Add tempo do "alarme"
-        times.add(LocalTime.parse("11:45:00"));
-        times.add(LocalTime.parse("11:46:00"));
+        times.add(LocalTime.parse("11:59:00"));
+        times.add(LocalTime.parse("12:00:00"));
 
         // Cria Thread passando a classe Clock com implements Runnable como param e
         // na classe Clock passando a lista de horarios

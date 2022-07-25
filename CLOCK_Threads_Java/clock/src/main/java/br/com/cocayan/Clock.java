@@ -26,17 +26,21 @@ public class Clock implements Runnable {
     // Run
     @Override
     public void run() {
-        while (true) {
-            try {
-                for (LocalTime localTime : this.listLocalTime) {
-                    Long dif = getDifInMilis(this.now, localTime);
-                    System.out.println("Time atual = " + localTime.getHour() + ":" + localTime.getMinute() + ":" + localTime.getSecond());
-                    System.out.println("A mimir...");
-                    Thread.sleep(dif);
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        try {
+            // Percorre a lista de tempos passado pelo construtor
+            for (LocalTime localTime : this.listLocalTime) {
+
+                //Chama função para pegar a diferença entre os horarios
+                Long dif = getDifInMilis(this.now, localTime);
+
+                System.out.println("Time atual = " + localTime.getHour() + ":" + localTime.getMinute() + ":" + localTime.getSecond());
+                System.out.println("A mimir...");
+                
+                // Bota a Thread para nanar :)
+                Thread.sleep(dif);
             }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
     
