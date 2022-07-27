@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cocayan.clock.entities.User;
+import br.com.cocayan.clock.service.ClockService;
 import br.com.cocayan.clock.service.UserService;
 
 @RestController
@@ -20,8 +21,13 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    ClockService clockService;
+
     @GetMapping()
-    public void findAllUSers() { }
+    public void findAllUSers() { 
+        System.out.println(clockService.getUsers());
+    }
 
     @GetMapping("/{userId}")
     public void findUserById(@PathVariable Long userId) { }
