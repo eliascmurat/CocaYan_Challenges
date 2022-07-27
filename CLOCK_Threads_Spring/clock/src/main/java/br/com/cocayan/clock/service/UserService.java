@@ -1,59 +1,49 @@
 package br.com.cocayan.clock.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.cocayan.clock.entities.User;
+import br.com.cocayan.clock.repository.UserRepository;
 
 @Service
 public class UserService {
     
-    private List<User> users = new ArrayList<>();
+    @Autowired
+    UserRepository userRepository;
 
-    public List<User> findAllUsers() {
-        return users;
-    }
+    public Optional<User> getPeopleById(Long peopleId) {
+        return userRepository.findById(peopleId);
+    } 
 
-    public User findUserById(Long userId) {
-        for (User u : users) {
-            if (u.getUserId() == userId) {
-                return u;
-            }
+    public User createUser(User user) {   
+        return userRepository.save(user);
+    } 
+
+    public User updateUser(User user) {
+        Optional<User> optional = userRepository.findById(user.getUserId());
+        if (optional.isPresent()) {
+            User updateUser = optional.get();
+            updateUser.setFirstName(user.getFirstName());
+            updateUser.setLastName(user.getLastName());
+
+            return userRepository.save(updateUser);
         }
 
-        return null;
-    }
-
-    public User createUser(User user) {
-        user.setUserId((long) (users.size() + 1));
-        users.add(user);
         return user;
     }
 
-    public User updateUser(User user) {
-        for (User u : users) {
-            if (u.getUserId() == user.getUserId()) {
-                u.setFirstName(user.getFirstName());
-                u.setLastName(user.getLastName());
-
-                return u;
-            }
-        }
-
-        return null;
-    }
-
     public boolean deleteUser(Long userId) {
-        for (User u : users) {
-            if (u.getUserId() == userId) {
-                users.remove(u);
-                return true;
-            }
+        Optional<User> optional = userRepository.findById(userId);
+        if (optional.isPresent()) {
+            userRepository.deleteById(userId);
+            
+            return true;
         }
-
+        
         return false;
-    }
+    } 
 
 }

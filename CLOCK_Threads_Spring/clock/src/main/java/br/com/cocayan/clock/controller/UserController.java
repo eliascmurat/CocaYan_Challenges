@@ -1,7 +1,5 @@
 package br.com.cocayan.clock.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,45 +20,19 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping
-    public List<User> findAllUsers() {
-        return userService.findAllUsers();
-    }
+    @GetMapping()
+    public void findAllUSers() { }
 
     @GetMapping("/{userId}")
-    public String findUserById(@PathVariable Long userId) {
-        try {
-            return userService.findUserById(userId).toString();
-        } catch (Exception e) {
-            return "User não encontrado!";
-        }
-    }
+    public void findUserById(@PathVariable Long userId) { }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
-    }
+    public void createUser(@RequestBody User user) { }
 
     @PutMapping
-    public String updateUser(@RequestBody User user) {
-        try {
-            return userService.updateUser(user).toString();
-        } catch (Exception e) {
-            return "userId não pode ser nulo!";
-        }
-    }
+    public void updateUser(@RequestBody User user) { }
 
     @DeleteMapping
-    public String deleteUser(@RequestBody User user) {
-        try {
-            String result = (userService.deleteUser(user.getUserId())) 
-                ? "User deletado com sucesso!" 
-                : "User não encontrado!";
-
-            return result;
-        } catch (Exception e) {
-            return "userId não pode ser nulo!";
-        }
-    }
+    public void deleteUser(@RequestBody User user) { }
 
 }
