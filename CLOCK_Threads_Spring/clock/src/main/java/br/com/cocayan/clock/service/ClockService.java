@@ -4,6 +4,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.cocayan.clock.entities.User;
@@ -22,8 +25,9 @@ public class ClockService implements Runnable {
         new Thread(this).start();
     }
 
-    public List<User> getUsers() {
-        return users;
+    public Page<User> getUsers(Pageable pageable) {
+        Page<User> page = new PageImpl<>(this.users, pageable, this.users.size());
+        return page;
     }
     
     private List<User> getAllUsers() {
@@ -38,7 +42,7 @@ public class ClockService implements Runnable {
 
                 if (
                     LocalTime.now().getHour() == 18 && 
-                    LocalTime.now().getMinute() == 42 &&
+                    LocalTime.now().getMinute() >= 43 &&
                     LocalTime.now().getSecond() == 0
                 ) {    
                     this.users = this.getAllUsers();            
