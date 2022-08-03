@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'people',
-    loadChildren: () => import('./peoples/peoples.module').then(m => m.PeoplesModule)
+    loadChildren: () => import('./people/people.module').then(m => m.PeoplesModule)
   },
   {
     path: '**',
