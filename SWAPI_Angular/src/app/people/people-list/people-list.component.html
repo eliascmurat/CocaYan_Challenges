@@ -1,3 +1,5 @@
-<p>people-list works!</p>
+<p>Lista de people</p>
 
-<app-people-card *ngFor="let people of peopleList"></app-people-card>
+<div *ngFor="let people of peopleList">
+  <app-people-card [people]="people"></app-people-card>
+</div>
