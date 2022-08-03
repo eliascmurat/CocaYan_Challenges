@@ -1,4 +1,6 @@
+import { People } from './../people';
 import { Component, OnInit } from '@angular/core';
+import { PeopleService } from '../people.service';
 
 @Component({
   selector: 'app-people-list',
@@ -7,10 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PeopleListComponent implements OnInit {
 
-  constructor() { }
+  peopleList: People[] = [];
+
+  constructor(
+    private peopleService: PeopleService
+  ) { }
 
   ngOnInit(): void {
     console.log('carregando people list');
+    this.getAllPeoples();
+  }
+
+  getAllPeoples() {
+    this.peopleService.getAllPeoples().then((peoples: any) => {
+      this.peopleList = peoples.results;
+    });
   }
 
 }

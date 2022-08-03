@@ -3,7 +3,7 @@ import { environment } from "src/environments/environment";
 import axios from 'axios';
 import { People } from "./people";
 
-const API_URL = environment.swapi_url;
+const API = environment.swapi_url;
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +12,9 @@ export class PeopleService {
 
   async getAllPeoples() {
     try {
-      const result = await axios.get<People>(API_URL);
+      const result = await axios.get<People[]>(API + '/people');
 
-      console.log(result);
-
-      return result;
+      return result.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.log('error message: ', error.message);
