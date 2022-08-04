@@ -8,14 +8,10 @@ import { People } from '../../people';
 })
 export class PeopleCardComponent implements OnInit {
 
-  @Input() people!: People;
+  // @Input() people!: People;
 
   constructor() { }
 
-  ngOnInit(): void {
-    console.log('carregando people card');
-    console.log('dados do people:');
-    console.log(this.people);
-  }
+  ngOnInit(): void { }
 
 }

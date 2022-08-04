@@ -9,21 +9,21 @@ import { PeopleService } from '../people.service';
 })
 export class PeopleListComponent implements OnInit {
 
-  peopleList: People[] = [];
+  peoples: People[] = [];
 
-  constructor(
-    private peopleService: PeopleService
-  ) { }
+  constructor(private peopleService: PeopleService) { }
 
   ngOnInit(): void {
-    console.log('carregando people list');
-    this.getAllPeoples();
+    this.getAllPeople();
   }
 
-  getAllPeoples() {
-    this.peopleService.getAllPeoples().then((peoples: any) => {
-      this.peopleList = peoples.results;
-    });
+  getAllPeople() {
+    this.peopleService.getAllPeoples()
+      .then((response) => {
+        this.peoples = response.data.results;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
-
 }

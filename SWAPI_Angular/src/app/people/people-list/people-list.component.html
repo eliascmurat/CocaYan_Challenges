@@ -1,5 +1,9 @@
 <p>Lista de people</p>
 
-<div *ngFor="let people of peopleList">
-  <app-people-card [people]="people"></app-people-card>
+<div *ngIf="peoples.length; else loading">
+  <p *ngFor="let people of peoples">{{ people.name }}</p>
 </div>
+
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>

@@ -9,8 +9,6 @@ export class PeopleComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-    console.log('carregando peoples');
-  }
+  ngOnInit(): void { }
 
 }
