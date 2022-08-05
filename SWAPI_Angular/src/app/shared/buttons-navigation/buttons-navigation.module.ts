@@ -9,6 +9,9 @@ import { ButtonsNavigationComponent } from './buttons-navigation.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    ButtonsNavigationComponent
   ]
 })
 export class ButtonsNavigationModule { }

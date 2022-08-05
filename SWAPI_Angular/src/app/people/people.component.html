@@ -1,7 +1,8 @@
 <div class="people-container">
   <app-people-card *ngIf="people; else loading" [people]="people"></app-people-card>
+  <app-buttons-navigation></app-buttons-navigation>
 </div>
 
 <ng-template #loading>
-
+  <app-loading></app-loading>
 </ng-template>
