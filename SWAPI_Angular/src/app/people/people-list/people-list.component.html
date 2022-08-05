@@ -1,7 +1,7 @@
 <p>Lista de people</p>
 
 <div *ngIf="peoples.length; else loading">
-  <p *ngFor="let people of peoples">{{ people.name }}</p>
+  <app-people-card *ngFor="let people of peoples" [people]="people"></app-people-card>
 </div>
 
 <ng-template #loading>

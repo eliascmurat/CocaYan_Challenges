@@ -8,7 +8,7 @@ import { People } from '../../people';
 })
 export class PeopleCardComponent implements OnInit {
 
-  // @Input() people!: People;
+  @Input() people!: People;
 
   constructor() { }
 
