@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-buttons-navigation',
@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ButtonsNavigationComponent implements OnInit {
 
+  @Input() index: number = 1;
+
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() { }
+
+  previousPeople() {
+    console.log(--this.index);
+  }
+
+  nextPeople() {
+    console.log(++this.index)
   }
 
 }
