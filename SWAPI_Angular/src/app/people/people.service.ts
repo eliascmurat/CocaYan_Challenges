@@ -1,9 +1,8 @@
-import { Injectable } from "@angular/core";
-import { environment } from "src/environments/environment";
+import { Injectable } from '@angular/core';
 import axios from 'axios';
-import { People } from "./people";
+import { environment } from 'src/environments/environment';
 
-const API = environment.swapi_url + '/people';
+const API = environment.swapi_url + '/people/1';
 
 @Injectable({
   providedIn: 'root'
