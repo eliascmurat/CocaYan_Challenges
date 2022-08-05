@@ -1,3 +1,7 @@
-<div class="container">
-  <app-people-card></app-people-card>
+<div class="people-container">
+  <app-people-card *ngIf="people; else loading" [people]="people"></app-people-card>
 </div>
+
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>
