@@ -29,4 +29,12 @@ export class PeopleComponent implements OnInit {
       });
   }
 
+  previousPeople() {
+    console.log(--this.initialPeopleId);
+  }
+
+  nextPeople() {
+    console.log(++this.initialPeopleId)
+  }
+
 }
