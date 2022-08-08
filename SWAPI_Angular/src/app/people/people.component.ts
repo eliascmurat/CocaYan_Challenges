@@ -14,6 +14,7 @@ export class PeopleComponent implements OnInit {
   initialPeopleId: number = 1;
 
   loading: boolean = false;
+  notFound: boolean = false;
 
   constructor(private peopleService: PeopleService) { }
 
@@ -27,9 +28,10 @@ export class PeopleComponent implements OnInit {
     this.peopleService.getPeopleById(peopleId)
     .then((response) => {
       this.people = response.data;
+      this.notFound = false;
     })
     .catch((error) => {
-      console.log(error);
+      this.notFound = true;
     })
     .finally(() => {
       this.loading = false;
