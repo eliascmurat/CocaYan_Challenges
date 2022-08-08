@@ -13,28 +13,35 @@ export class PeopleComponent implements OnInit {
   people!: People;
   initialPeopleId: number = 1;
 
+  loading: boolean = false;
+
   constructor(private peopleService: PeopleService) { }
 
   ngOnInit() {
-    this.getPeopleById();
+    this.getPeopleById(this.initialPeopleId);
   }
 
-  getPeopleById() {
-    this.peopleService.getPeopleById(this.initialPeopleId)
-      .then((response) => {
-        this.people = response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  getPeopleById(peopleId: number) {
+    this.loading = true;
+
+    this.peopleService.getPeopleById(peopleId)
+    .then((response) => {
+      this.people = response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
+      this.loading = false;
+    });
   }
 
   prevPeople() {
-    console.log(--this.initialPeopleId);
+    this.getPeopleById(--this.initialPeopleId);
   }
 
   nextPeople() {
-    console.log(++this.initialPeopleId)
+    this.getPeopleById(++this.initialPeopleId);
   }
 
 }

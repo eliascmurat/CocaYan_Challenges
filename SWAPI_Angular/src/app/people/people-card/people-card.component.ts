@@ -13,8 +13,6 @@ export class PeopleCardComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    console.log(this.people);
-  }
+  ngOnInit() { }
 
 }

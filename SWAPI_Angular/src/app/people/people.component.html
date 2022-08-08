@@ -1,12 +1,12 @@
-<div class="people-container" *ngIf="people; else loading">
+<div class="people-container" *ngIf="people && !loading; else loadingOverlay">
   <app-people-card [people]="people"></app-people-card>
 
   <div class="buttons-navigation">
-    <button (click)="prevPeople()">&lt;</button>
+    <button (click)="prevPeople()" [disabled]="initialPeopleId <= 1">&lt;</button>
     <button (click)="nextPeople()">&gt;</button>
   </div>
 </div>
 
-<ng-template #loading>
+<ng-template #loadingOverlay>
   <app-loading></app-loading>
 </ng-template>
