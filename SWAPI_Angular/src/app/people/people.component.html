@@ -1,11 +1,10 @@
 <div class="people-container">
   <div *ngIf="people">
     <app-people-card *ngIf="!notFound; else notFoundTemplate" [people]="people"></app-people-card>
-  </div>
-
-  <div class="buttons-navigation" *ngIf="people">
-    <button (click)="prevPeople()" [disabled]="initialPeopleId <= 1 || loading">&lt;</button>
-    <button (click)="nextPeople()" [disabled]="initialPeopleId >= 83 || loading">&gt;</button>
+    <div class="buttons-navigation">
+      <button (click)="prevPeople()" [disabled]="initialPeopleId <= 1 || loading">&lt;</button>
+      <button (click)="nextPeople()" [disabled]="initialPeopleId >= 83 || loading">&gt;</button>
+    </div>
   </div>
 </div>
 
