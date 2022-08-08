@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { People } from './people';
-import { PeopleService } from './people.service';
+import { People } from './entities/people';
+import { PeopleService } from './services/people.service';
 
 @Component({
   selector: 'app-people',
@@ -27,6 +27,14 @@ export class PeopleComponent implements OnInit {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  prevPeople() {
+    console.log(--this.initialPeopleId);
+  }
+
+  nextPeople() {
+    console.log(++this.initialPeopleId)
   }
 
 }

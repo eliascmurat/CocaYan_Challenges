@@ -1,6 +1,10 @@
-<div class="people-container">
-  <app-people-card *ngIf="people; else loading" [people]="people"></app-people-card>
-  <app-buttons-navigation></app-buttons-navigation>
+<div class="people-container" *ngIf="people; else loading">
+  <app-people-card [people]="people"></app-people-card>
+
+  <div class="buttons-navigation">
+    <button (click)="prevPeople()">&lt;</button>
+    <button (click)="nextPeople()">&gt;</button>
+  </div>
 </div>
 
 <ng-template #loading>

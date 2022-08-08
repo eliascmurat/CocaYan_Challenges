@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { People } from '../people';
+import { People } from '../entities/people';
 
 @Component({
   selector: 'app-people-card',
