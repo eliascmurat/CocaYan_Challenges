@@ -1,1 +1,10 @@
-<p>{{ people.name }}</p>
+<div class="people-card">
+  <h1>{{ people.name }}</h1>
+  <p>Height: {{ people.height }}</p>
+  <p>Mass: {{ people.mass }}</p>
+  <p>Hair color: {{ people.hair_color | titlecase }}</p>
+  <p>Skin color: {{ people.skin_color | titlecase }}</p>
+  <p>Eye color: {{ people.eye_color | titlecase }}</p>
+  <p>Birth year: {{ people.birth_year }}</p>
+  <p>Gender: {{ people.gender | titlecase }}</p>
+</div>
